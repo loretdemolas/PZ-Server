@@ -1,7 +1,5 @@
-#!/bin/sh
-
 # Set to `-x` for Debug logging
-set +x -o pipefail
+set -x -o pipefail
 
 
 
