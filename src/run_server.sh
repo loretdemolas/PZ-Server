@@ -3,6 +3,8 @@
 # Set to `-x` for Debug logging
 set +x -o pipefail
 
+
+
 # Handle shutting down the server, with optional RCON quit for graceful shutdown
 function shutdown() {
     if [[ "$RCON_ENABLED" == "true" ]]; then
@@ -36,10 +38,10 @@ function start_server() {
 
     printf "\n### Project Zomboid Server stopped.\n"
 }
-
+    chmod 777 
 function apply_postinstall_config() {
     printf "\n### Applying Post Install Configuration...\n"
-
+     
     # Set the Autosave Interval
     "$EDIT_CONFIG" "$SERVER_CONFIG" "SaveWorldEveryMinutes" "$AUTOSAVE_INTERVAL"
 
