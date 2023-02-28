@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: docker/zomboid-dedicated-server.Dockerfile
-    image: "ghcr.io/loretdemolas/pz-server:sha256-581c43fbc6284333b43f0eee8d510946adde87d70f0e7340c9b45bc6c4f19985.sig"
+    image: "ghcr.io/loretdemolas/pz-server:master"
     container_name: zomboid-dedicated-server
     restart: "no"
     environment:
