@@ -1,11 +1,12 @@
 ARG BASE_IMAGE="docker.io/renegademaster/steamcmd-minimal:2.0.0-root"
 
-
 FROM ${BASE_IMAGE}
-
+    
 
 # Copy the source files
-COPY src /home/steam/
+COPY edit_server_config.py /home/steam/
+COPY install_server.scmd /home/steam/
+COPY run_server.sh /home/steam/
 
 # Install Python, and take ownership of rcon binary
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -13,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
-RUN chmod +rwx /home/steam/run_server.sh
+RUN chmod +rwx /home/steam
 
 # Run the setup script
-ENTRYPOINT ["bin/bash", "/home/steam/run_server.sh"]
+ENTRYPOINT ["/bin/bash", "/home/steam/run_server.sh"]

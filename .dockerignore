@@ -1,2 +1,4 @@
 *
-!src
+!edit_server_config.py
+!install_server.scmd
+!run_server.sh
