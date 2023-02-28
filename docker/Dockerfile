@@ -1,6 +1,8 @@
 ARG BASE_IMAGE="docker.io/renegademaster/steamcmd-minimal:1.1.2"
 
+
 FROM ${BASE_IMAGE}
+
 
 # Copy the source files
 COPY src /home/steam/
