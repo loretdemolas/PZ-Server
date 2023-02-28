@@ -76,13 +76,12 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v4
         with:
-          context: .
           push: true
           tags: user/app:latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          file: {context}/docker/zomboid-dedicated-server.Dockerfile
+          file: {context}/docker/Dockerfile
 
 
       # Sign the resulting Docker image digest except on PRs.
