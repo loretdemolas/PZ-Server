@@ -4,7 +4,7 @@ services:
   zomboid-dedicated-server:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/zomboid-dedicated-server.Dockerfile
     image: "docker.io/renegademaster/zomboid-dedicated-server:latest"
     container_name: zomboid-dedicated-server
     restart: "no"
