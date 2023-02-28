@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
-RUN chmod +x /home/steam/run_server.sh
+RUN chmod +rwx /home/steam/run_server.sh
 
 # Run the setup script
-ENTRYPOINT ["!#/bin/bash", "/home/steam/run_server.sh"]
+ENTRYPOINT ["bin/bash", "/home/steam/run_server.sh"]
