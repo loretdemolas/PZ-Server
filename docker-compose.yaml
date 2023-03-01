@@ -7,7 +7,7 @@ services:
       dockerfile: docker/zomboid-dedicated-server.Dockerfile
     image: "ghcr.io/loretdemolas/pz-server:master"
     container_name: zomboid-dedicated-server
-    restart: "no"
+    restart: unless-stopped
     environment:
       - "ADMIN_PASSWORD=changeme"
       - "ADMIN_USERNAME=superuser"
@@ -35,12 +35,29 @@ services:
       - target: 16261
         published: 16261
         protocol: udp
-      - target: 16262
-        published: 16262
+      - target: 16262 - 16272
+        published: 16262 -16272
         protocol: udp
       - target: 27015
         published: 27015
         protocol: tcp
     volumes:
-      - ./ZomboidDedicatedServer:/home/steam/ZomboidDedicatedServer
-      - ./ZomboidConfig:/home/steam/Zomboid/
+      - type: volume
+        source: ZomboidDedicatedServer
+        target: /home/steam/ZomboidDedicatedServer
+      - type: volume
+        source: ZomboidConfig
+        target: /home/steam/Zomboid/
+    tty: true
+    stdin_open: true 
+    networks:
+      - network1
+volumes:
+  ZomboidDedicatedServer:
+    external: true
+  ZomboidConfig:
+    external: true
+networks:
+  network1:
+    name: GameServer
+    external: true
