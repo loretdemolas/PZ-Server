@@ -9,23 +9,23 @@ services:
     container_name: zomboid-dedicated-server
     restart: unless-stopped
     environment:
-      - "ADMIN_PASSWORD=changeme"
-      - "ADMIN_USERNAME=superuser"
-      - "AUTOSAVE_INTERVAL=15"
+      - "ADMIN_PASSWORD=Seba5054.."
+      - "ADMIN_USERNAME=Bobs Your Uncle"
+      - "AUTOSAVE_INTERVAL=5"
       - "BIND_IP=0.0.0.0"
       - "DEFAULT_PORT=16261"
       - "GAME_VERSION=public"
       - "GC_CONFIG=ZGC"
       - "MAP_NAMES=Muldraugh, KY"
-      - "MAX_PLAYERS=16"
+      - "MAX_PLAYERS=10"
       - "MAX_RAM=4096m"
       - "MOD_NAMES="
       - "MOD_WORKSHOP_IDS="
       - "PAUSE_ON_EMPTY=true"
       - "PUBLIC_SERVER=true"
-      - "RCON_PASSWORD=changeme_rcon"
+      - "RCON_PASSWORD=Seba5054!!"
       - "RCON_PORT=27015"
-      - "SERVER_NAME=ZomboidServer"
+      - "SERVER_NAME=Zomboid Server"
       - "SERVER_PASSWORD="
       - "STEAM_VAC=true"
       - "UDP_PORT=16262"
@@ -35,8 +35,35 @@ services:
       - target: 16261
         published: 16261
         protocol: udp
-      - target: 16262-16272
-        published: 16262-16272
+      - target: 16262
+        published: 16262
+        protocol: udp
+      - target: 16263
+        published: 16263
+        protocol: udp
+      - target: 16264
+        published: 16264
+        protocol: udp
+      - target: 16265
+        published: 16265
+        protocol: udp
+      - target: 16266
+        published: 16266
+        protocol: udp
+      - target: 16267
+        published: 16267
+        protocol: udp
+      - target: 16268
+        published: 16268
+        protocol: udp
+      - target: 16269
+        published: 16269
+        protocol: udp
+      - target: 16270
+        published: 16270
+        protocol: udp
+      - target: 16271
+        published: 16271
         protocol: udp
       - target: 27015
         published: 27015
