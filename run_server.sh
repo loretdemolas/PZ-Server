@@ -42,8 +42,8 @@ function apply_postinstall_config() {
     printf "\n### Applying Post Install Configuration...\n"
     
     #take permission of the config
-    chmod 777 "$SERVER_CONGIG"
-    chmod 777 "$EDIT_CONGIG"
+    chmod 777 "/home/steam/Zomboid/Server/Zomboid Server.ini"
+    chmod 777 "/home/steam/edit_server_config.py"
     # Set the Autosave Interval
     "$EDIT_CONFIG" "$SERVER_CONFIG" "SaveWorldEveryMinutes" "$AUTOSAVE_INTERVAL"
 
