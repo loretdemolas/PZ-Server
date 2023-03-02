@@ -43,6 +43,7 @@ function apply_postinstall_config() {
     
     #take permission of the config
     chmod 777 "$SERVER_CONGIG"
+    chmod 777 "$EDIT_CONGIG"
     # Set the Autosave Interval
     "$EDIT_CONFIG" "$SERVER_CONFIG" "SaveWorldEveryMinutes" "$AUTOSAVE_INTERVAL"
 
