@@ -31,7 +31,7 @@ services:
       - "UDP_PORT=16262"
       - "USE_STEAM=true"
       - "TZ=UTC"
-      - "ResetID=4017086"
+      - "RESETID=4017086"
     ports:
       - target: 16261
         published: 16261

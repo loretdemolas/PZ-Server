@@ -79,6 +79,9 @@ function apply_postinstall_config() {
     # Set the Server Password
     "$EDIT_CONFIG" "$SERVER_CONFIG" "Password" "$SERVER_PASSWORD"
 
+    #Set the Serer ResetID
+    "$EDIT_CONFIG" "$SERVER_CONFIG" "ResetID" "$RESETID"
+
     # Set the maximum amount of RAM for the JVM
     sed -i "s/-Xmx.*/-Xmx${MAX_RAM}\",/g" "${SERVER_VM_CONFIG}"
 
@@ -194,6 +197,9 @@ function set_variables() {
 
     # Set Steam VAC Protection variable
     STEAM_VAC=${STEAM_VAC:-"true"}
+
+    #Set the Server ResetID
+    RESETID=${RESETID:-"4017086"}
 
     # Set server type variable
     if [[ -z "$USE_STEAM" ]] || [[ "$USE_STEAM" == "true" ]]; then
