@@ -36,7 +36,13 @@ function start_server() {
 
     printf "\n### Project Zomboid Server stopped.\n"
 }
-    chmod 777 
+
+function chmod_all_rw() {
+  DEST=${1?'which path? (Can use *name* if all matches desired)'}
+  find ${DEST} -type d -exec chmod 777 {} \;
+  find ${DEST} -type f -exec chmod 666 {} \;
+}
+
 function apply_postinstall_config() {
     printf "\n### Applying Post Install Configuration...\n"
      
@@ -227,6 +233,7 @@ set_variables
 apply_preinstall_config
 update_server
 test_first_run
+chmod_all_rw "/home/steam/Zomboid/"
 apply_postinstall_config
 
 # Intercept termination signals to stop the server gracefully

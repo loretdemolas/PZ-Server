@@ -1,4 +1,4 @@
-ARG BASE_IMAGE="docker.io/renegademaster/steamcmd-minimal:2.0.0-root"
+ARG BASE_IMAGE="docker.io/renegademaster/steamcmd-minimal:2.0.0"
 
 FROM ${BASE_IMAGE}
     
