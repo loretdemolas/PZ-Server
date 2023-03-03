@@ -75,4 +75,4 @@ jobs:
       - name: Sign the images with GitHub OIDC Token **not production ready**
         run: cosign sign ${TAGS}
         env:
-          TAGS: ${{ steps.docker_meta.outputs.tags }}
+          TAGS: ${{ steps.meta.outputs.tags }}
