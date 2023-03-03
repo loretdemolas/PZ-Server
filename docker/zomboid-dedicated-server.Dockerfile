@@ -27,9 +27,14 @@ COPY --chown=${RUN_USER} edit_server_config.py install_server.scmd run_server.sh
 
 #set permission for home directory to 1000:1000
 RUN chown -R  ${UID}:${GID} /home/${RUN_USER}/ \
-    && chown -R ${UID}:${GID} /tmp/dumps \
-    && chmod a+x /home/steam/edit_server_config.py \
-    && chmod a+x /home/steam/install_server.scmd
+    && chown -R ${UID}:${GID} /tmp/dumps 
+
+#move into workdir
+WORKDIR /home/steam/
+
+#Change perms for scripts
+
+RUN chmod a+x edit_server_config.py install_server.scmd
 
 #change back to user
 USER ${RUN_USER}
