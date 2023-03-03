@@ -1,12 +1,17 @@
-ARG BASE_IMAGE="docker.io/renegademaster/steamcmd-minimal:2.0.0-root"
+#non root base image
+
+ARG BASE_IMAGE="docker.io/renegademaster/steamcmd-minimal:latest"
+ARG UID=1000
+ARG GID=${UID}
+ARG RUN_USER=steam
 
 FROM ${BASE_IMAGE}
-    
+ARG UID
+ARG GID
+ARG RUN_USER    
 
-# Copy the source files
-COPY edit_server_config.py /home/steam/
-COPY install_server.scmd /home/steam/
-COPY run_server.sh /home/steam/
+#becoome root do install packacges
+USER 0:0
 
 # Install Python, and take ownership of rcon binary
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -14,7 +19,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
-RUN chmod +rwx /home/steam
+RUN groupadd "${RUN_USER}" \
+        --gid "${GID}" \
+    && useradd "${RUN_USER}" --create-home \
+        --uid "${UID}" \
+        --gid "${GID}" \
+        --home-dir /home/${RUN_USER} \
+    && chown -R ${UID}:${GID} /home/${RUN_USER}/
+
+USER ${RUN_USER}
+
+# Copy the source files
+COPY --chown=${RUN_USER} edit_server_config.py /home/steam/
+COPY --chown=${RUN_USER} install_server.scmd /home/steam/
+COPY --chown=${RUN_USER} run_server.sh /home/steam/
 
 # Run the setup script
 ENTRYPOINT ["/bin/bash", "/home/steam/run_server.sh"]
