@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd "${RUN_USER}" --create-home --uid "${UID}" --gid "${GID}" --home-dir /home/${RUN_USER} 
+RUN mkhomedir_helper "${RUN_USER}" 
 RUN chown -R ${UID}:${GID} /home/${RUN_USER}/
 
 USER ${RUN_USER}
