@@ -13,14 +13,13 @@ ARG RUN_USER
 #becoome root do install packacges
 USER 0:0
 
-# Install Python, and take ownership of rcon binary
+# Install Python, take ownership of rcon binary, and create homedir with proper perms.
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python3-minimal iputils-ping tzdata \
     && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN mkhomedir_helper "${RUN_USER}" 
-RUN chown -R ${UID}:${GID} /home/${RUN_USER}/
+    && rm -rf /var/lib/apt/lists/* \
+    && mkhomedir_helper "${RUN_USER}" \
+    && chown -R ${UID}:${GID} /home/${RUN_USER}/
 
 USER ${RUN_USER}
 
