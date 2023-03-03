@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY --chown=${RUN_USER} edit_server_config.py install_server.scmd run_server.sh /home/steam/
 
 #set permission for home directory to 1000:1000
-RUN chown -R -H ${UID}:${GID} /home/${RUN_USER}/
+RUN chown -R  ${UID}:${GID} /home/${RUN_USER}/
 
 #change back to user
 USER ${RUN_USER}
