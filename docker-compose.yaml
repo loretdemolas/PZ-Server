@@ -6,6 +6,9 @@ services:
     build:
       context: .
       dockerfile: docker/zomboid-dedicated-server.Dockerfile
+      args:
+        - "UID=${UID:-1000}"
+        - "GID=${GID:-1000}"
     image: "ghcr.io/loretdemolas/pz-server:master"
     container_name: zomboid-dedicated-server
     restart: unless-stopped
