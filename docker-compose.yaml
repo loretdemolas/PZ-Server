@@ -83,7 +83,9 @@ services:
       - network1
 volumes:
   ZomboidDedicatedServer:
+    external: true
   ZomboidConfig:
+    external: true
 networks:
   network1:
     name: GameServer

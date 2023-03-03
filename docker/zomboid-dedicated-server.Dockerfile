@@ -28,5 +28,8 @@ COPY --chown=${RUN_USER} run_server.sh /home/steam/
 
 USER ${RUN_USER}
 
+RUN mkdir /home/steam/ZomboidDedicatedServer \
+&& mkdir /home/steam/Zomboid/
+
 # Run the setup script
 ENTRYPOINT ["/bin/bash", "/home/steam/run_server.sh"]
