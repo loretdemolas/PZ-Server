@@ -21,12 +21,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && mkhomedir_helper "${RUN_USER}" \
     && chown -R ${UID}:${GID} /home/${RUN_USER}/
 
-USER ${RUN_USER}
-
 # Copy the source files
 COPY --chown=${RUN_USER} edit_server_config.py /home/steam/
 COPY --chown=${RUN_USER} install_server.scmd /home/steam/
 COPY --chown=${RUN_USER} run_server.sh /home/steam/
+
+USER ${RUN_USER}
 
 # Run the setup script
 ENTRYPOINT ["/bin/bash", "/home/steam/run_server.sh"]
