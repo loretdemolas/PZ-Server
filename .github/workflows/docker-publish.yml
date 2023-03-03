@@ -44,7 +44,7 @@ jobs:
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
         if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@main
+        uses: sigstore/cosign-installer@2.0.0
         
       # Workaround: https://github.com/docker/build-push-action/issues/461
       - name: Set up Docker Buildx
@@ -88,20 +88,15 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           file: ./docker/zomboid-dedicated-server.Dockerfile
-         
-
-      # Sign the resulting Docker image digest except on PRs.
-      # This will only write to the public Rekor transparency log when the Docker
-      # repository is public to avoid leaking data.  If you would like to publish
-      # transparency data even for private images, pass --force to cosign below.
-      # https://github.com/sigstore/cosign
-      - name: Sign the published Docker image
-        if: ${{ github.event_name != 'pull_request' }}
+      
+      
+      - name: Write signing key to disk
+        run: 'echo "$KEY" > cosign.key'
+        shell: bash
         env:
-          COSIGN_EXPERIMENTAL: "true"
-          TAGS: ${{ steps.meta.outputs.tags }}
-          COSIGN_PRIVATE_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
-          COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
-        # This step uses the identity token to provision an ephemeral certificate
-        # against the sigstore community Fulcio instance.
-        run: cosign sign --key env://COSIGN_PRIVATE_KEY ${TAGS}
+          KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}   
+
+      - name: Sign the published Docker image
+        env:
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+        run: cosign sign --key cosign.key ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}:${{ github.run_id }}
