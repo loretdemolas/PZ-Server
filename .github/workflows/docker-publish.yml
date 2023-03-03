@@ -71,8 +71,8 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           file: ./docker/zomboid-dedicated-server.Dockerfile
-        
-        - name: Sign the images with GitHub OIDC Token **not production ready**
-          run: cosign sign ${TAGS}
-          env:
-            TAGS: ${{ steps.docker_meta.outputs.tags }}
+      
+      - name: Sign the images with GitHub OIDC Token **not production ready**
+        run: cosign sign ${TAGS}
+        env:
+          TAGS: ${{ steps.docker_meta.outputs.tags }}
