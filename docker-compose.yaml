@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   zomboid-dedicated-server:
+    user: "1000:1000"
     build:
       context: .
       dockerfile: docker/zomboid-dedicated-server.Dockerfile
@@ -82,9 +83,7 @@ services:
       - network1
 volumes:
   ZomboidDedicatedServer:
-    external: true
   ZomboidConfig:
-    external: true
 networks:
   network1:
     name: GameServer
