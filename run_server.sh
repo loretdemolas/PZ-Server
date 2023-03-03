@@ -23,7 +23,7 @@ function start_server() {
         -adminpassword "$ADMIN_PASSWORD" \
         -ip "$BIND_IP" -port "$DEFAULT_PORT" \
         -servername "$SERVER_NAME" \
-        -ReserID "$RESETID" \
+        -ResetID "$RESETID" \
         -steamvac "$STEAM_VAC" "$USE_STEAM" &
 
     server_pid=$!
