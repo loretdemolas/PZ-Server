@@ -10,26 +10,30 @@ ARG UID
 ARG GID
 ARG RUN_USER    
 
-#becoome root do install packacges
+#becoome root to install packacges and set up directory
 USER 0:0
 
-# Install Python, take ownership of rcon binary, and create homedir with proper perms.
+# Install Python, take ownership of rcon binary, create homedir, create game dir,.
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python3-minimal iputils-ping tzdata \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/* \
     && mkhomedir_helper "${RUN_USER}" \
-    && chown -R ${UID}:${GID} /home/${RUN_USER}/
+    && mkdir -p /home/steam/ZomboidDedicatedServer \
+    && mkdir -p /home/steam/Zomboid/
 
-# Copy the source files
-COPY --chown=${RUN_USER} edit_server_config.py /home/steam/
-COPY --chown=${RUN_USER} install_server.scmd /home/steam/
-COPY --chown=${RUN_USER} run_server.sh /home/steam/
+# Copy the scripts files
+COPY --chown=${RUN_USER} edit_server_config.py install_server.scmd run_server.sh /home/steam/
 
+#set permission for home directory to 1000:1000
+RUN chown -R -H ${UID}:${GID} /home/${RUN_USER}/
+
+#change back to user
 USER ${RUN_USER}
-
-RUN mkdir /home/steam/ZomboidDedicatedServer \
-&& mkdir /home/steam/Zomboid/
 
 # Run the setup script
 ENTRYPOINT ["/bin/bash", "/home/steam/run_server.sh"]
+
+
+
+
