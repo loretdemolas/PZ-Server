@@ -23,10 +23,8 @@ function start_server() {
         -adminpassword "$ADMIN_PASSWORD" \
         -ip "$BIND_IP" -port "$DEFAULT_PORT" \
         -servername "$SERVER_NAME" \
-        -ResetID "$RESETID" \
         -steamvac "$STEAM_VAC" "$USE_STEAM" &
-
-    server_pid=$!
+        server_pid=$!
     wait $server_pid
 
     # NOTE(ramielrowe): Apparently the first wait will return immediately after
@@ -201,7 +199,7 @@ function set_variables() {
     DEFAULT_PORT=${DEFAULT_PORT:-"16261"}
 
     # Set the Server name variable
-    SERVER_NAME=${SERVER_NAME:-"ZomboidServer"}
+    SERVER_NAME=${SERVER_NAME:-"servertest"}
 
     # Set the Server Password variable
     SERVER_PASSWORD=${SERVER_PASSWORD:-""}

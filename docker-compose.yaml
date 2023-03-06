@@ -29,7 +29,7 @@ services:
       - "PUBLIC_SERVER=true"
       - "RCON_PASSWORD=Seba5054!!"
       - "RCON_PORT=27015"
-      - "SERVER_NAME=Zomboid Server"
+      - "SERVER_NAME=servertest"
       - "SERVER_PASSWORD="
       - "STEAM_VAC=true"
       - "UDP_PORT=16262"
