@@ -83,7 +83,6 @@ services:
       - type: tmpfs
         target: /tmp
         tmpfs:
-          size: 1000
       - type: volume
         source: steamCMD
         target: /home/steam/.local/
