@@ -80,8 +80,6 @@ services:
       - type: volume
         source: ZomboidConfig
         target: /home/steam/Zomboid/
-      - type: tmpfs
-        target: /tmp
       - type: volume
         source: steamCMD
         target: /home/steam/.local/
